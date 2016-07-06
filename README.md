@@ -1,5 +1,5 @@
-Bourbon
-=======
+Aware
+=====
 
 <p align="center">
     <img src="art/icon.png" alt="Aware Icon"/>
