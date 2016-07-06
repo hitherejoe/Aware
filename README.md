@@ -2,7 +2,7 @@ Bourbon
 =======
 
 <p align="center">
-    <img src="images/icon.png" alt="Aware Icon"/>
+    <img src="art/icon.png" alt="Aware Icon"/>
 </p>
 
 Aware is a simple playground for the new Google Awareness API, nothing fancy!
@@ -11,7 +11,7 @@ Aware is a simple playground for the new Google Awareness API, nothing fancy!
 ---------------------
 
 <p align="center">
-    <img src="images/main.png" alt="Main Screen"/>
+    <img src="art/main.png" alt="Main Screen"/>
 </p>
 
 Snapshot API
