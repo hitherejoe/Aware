@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">Aware</string>
+
+    <!-- Main Activity -->
+    <string name="text_headphone_state">Headphone State</string>
+    <string name="text_weather">Weather</string>
+    <string name="text_places">Places</string>
+    <string name="text_user_activity">User Activity</string>
+    <string name="text_location">Location</string>
+    <string name="text_beacons">Beacons</string>
+    <string name="text_headphone_fence">Headphone Fence</string>
+    <string name="text_detected_activity_fence">Detected Activity Fence</string>
+    <string name="text_location_fence">Location Fence</string>
+    <string name="text_time_fence">Time Fence</string>
+    <string name="text_beacon_fence">Beacon Fence</string>
+
+    <!-- Headphone Activity -->
+    <string name="text_headphones_plugged_in">Looks like your headphones are plugged in!</string>
+    <string name="text_headphones_unplugged">Looks like your headphones are unplugged!</string>
+
+    <!-- Location Activity -->
+    <string name="text_coordinates">Coordinates: %s</string>
+    <string name="text_accuracy">Accuracy: %.2f</string>
+    <string name="text_altitude">Altitude: %.2f</string>
+
+    <!-- Weather Activity -->
+    <string name="text_temperature">Temperature: %.1f &#x2103;</string>
+    <string name="text_feels_like_temperature">Feels like temperature: %.1f &#x2103;</string>
+    <string name="text_humidity">Humidity: %.0f</string>
+    <string name="text_dew_point">Dew Point: %.1f &#x2103;</string>
+    <string name="text_conditions">Conditions: %s</string>
+
+    <string name="condition_unknown">Unknown</string>
+    <string name="condition_clear">Clear</string>
+    <string name="condition_cloudy">Cloudy</string>
+    <string name="condition_foggy">Foggy</string>
+    <string name="condition_hazy">Hazy</string>
+    <string name="condition_icy">Icy</string>
+    <string name="condition_rainy">Rainy</string>
+    <string name="condition_snowy">Snowy</string>
+    <string name="condition_stormy">Stormy</string>
+    <string name="condition_windy">Windy</string>
+
+    <string name="error_weather">Oops, there was an error getting the weather information!</string>
+
+    <!-- Places Activity -->
+    <string name="text_place" formatted="false">%s - Likelihood: %.2f</string>
+    <string name="error_loading_places">Oops, there was an error!</string>
+    <string name="error_no_places">Oops, no places to show!</string>
+
+
+    <!-- User Activities Activity -->
+    <string name="text_activity_time">Activity Start: %s</string>
+    <string name="text_elapsed_time">Elapsed Time: %s</string>
+    <string name="text_most_probable_activity" formatted="false">Most Probable Activity: %s . Confidence: %d</string>
+    <string name="text_probable_activities">Probable Activities: %s</string>
+    <string name="text_running_confidence">Confidence User is Running: %.2f</string>
+
+    <string name="activity_unknown">Unknown</string>
+    <string name="activity_in_vehicle">In Vehicle</string>
+    <string name="activity_on_bicycle">On Bicycle</string>
+    <string name="activity_on_foot">On Foot</string>
+    <string name="activity_running">Running</string>
+    <string name="activity_still">Still</string>
+    <string name="activity_tilting">Tilting</string>
+    <string name="activity_walking">Walking</string>
+
+    <!-- Location Fence Activity -->
+    <string name="text_at_home">Looks like you\'re at home!</string>
+    <string name="text_not_at_home">You\'re not at your house</string>
+    <string name="text_entering_home">Hello, you\'re now entering your house</string>
+    <string name="text_exiting_home">Goodbye, you\'re now exiting your house</string>
+
+    <!-- Detected Activity Fence -->
+    <string name="text_walking">Looks like you\'re walking!</string>
+    <string name="text_start_walking">You\'re starting to walk</string>
+    <string name="text_stopping_walking">You\'re coming to a halt</string>
+    <string name="text_still">You\'ve stopped walking</string>
+
+    <!-- Time Fence -->
+    <string name="text_that_time">It\'s that time!</string>
+    <string name="text_not_that_time">It\'s not that time...</string>
+
+    <!-- Beacon Fence -->
+    <string name="text_in_beacon_zone">You\'ve entered the beacon zone!</string>
+    <string name="text_not_in_beacon_zone">You\'re not in the beacon zone...</string>
+
+    <!-- Error messages -->
+    <string name="error_general">Oops, there was an error@</string>
+
+</resources>
