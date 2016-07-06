@@ -2,13 +2,17 @@ Bourbon
 =======
 
 <p align="center">
-    <img src="images/icon.png" alt="Bourbon Header"/>
+    <img src="images/icon.png" alt="Aware Icon"/>
 </p>
 
 Aware is a simple playground for the new Google Awareness API, nothing fancy!
 
 #What you can try out
 ---------------------
+
+<p align="center">
+    <img src="images/main.png" alt="Main Screen"/>
+</p>
 
 Snapshot API
 ------------
