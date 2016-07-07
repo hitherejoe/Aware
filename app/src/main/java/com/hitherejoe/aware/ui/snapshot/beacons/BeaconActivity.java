@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,9 +30,9 @@ import butterknife.ButterKnife;
 
 public class BeaconActivity extends AppCompatActivity {
 
-    @BindView(R.id.layout_beacons) LinearLayout mBeaconsLayout;
-
     private static final int PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 940;
+
+    @BindView(R.id.layout_beacons) LinearLayout mBeaconsLayout;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -51,6 +52,7 @@ public class BeaconActivity extends AppCompatActivity {
             actionBar.setTitle(R.string.text_beacons);
         }
         setupGoogleApiClient();
+        getBeacons();
     }
 
     @Override
@@ -58,34 +60,13 @@ public class BeaconActivity extends AppCompatActivity {
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case PERMISSION_REQUEST_ACCESS_FINE_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return;
-                    }
-                    Awareness.SnapshotApi.getWeather(mGoogleApiClient)
-                            .setResultCallback(new ResultCallback<WeatherResult>() {
-                                @Override
-                                public void onResult(@NonNull WeatherResult weatherResult) {
-                                    if (weatherResult.getStatus().isSuccess()) {
-                                        Weather weather = weatherResult.getWeather();
-                                        Log.e("WEATHER", weather.getHumidity() + "");
-                                    }
-                                }
-                            });
-
+                    getBeacons();
                 } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
+                    Snackbar.make(mBeaconsLayout,
+                            getString(R.string.error_general),
+                            Snackbar.LENGTH_LONG).show();
                 }
             }
         }
@@ -96,97 +77,32 @@ public class BeaconActivity extends AppCompatActivity {
                 .addApi(Awareness.API)
                 .build();
         mGoogleApiClient.connect();
-        getBeacons();
     }
 
     private void getBeacons() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        Awareness.SnapshotApi.getBeaconState(mGoogleApiClient, BEACON_TYPE_FILTERS)
-                .setResultCallback(new ResultCallback<BeaconStateResult>() {
-                    @Override
-                    public void onResult(@NonNull BeaconStateResult beaconStateResult) {
-                        if (beaconStateResult.getStatus().isSuccess()) {
-                            BeaconState beaconState = beaconStateResult.getBeaconState();
-                            List<BeaconState.BeaconInfo> beaconInfos = beaconState.getBeaconInfo();
-                            if (beaconInfos == null) {
-                                beaconInfos = new ArrayList<BeaconState.BeaconInfo>();
-                            }
-                            BeaconState.BeaconInfo beaconInfo = new BeaconState.BeaconInfo() {
-                                @Override
-                                public String getNamespace() {
-                                    return "0009-AABG-LLKM-UU89";
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSION_REQUEST_ACCESS_FINE_LOCATION);
+        } else {
+            Awareness.SnapshotApi.getBeaconState(mGoogleApiClient, BEACON_TYPE_FILTERS)
+                    .setResultCallback(new ResultCallback<BeaconStateResult>() {
+                        @Override
+                        public void onResult(@NonNull BeaconStateResult beaconStateResult) {
+                            if (beaconStateResult.getStatus().isSuccess()) {
+                                BeaconState beaconState = beaconStateResult.getBeaconState();
+                                List<BeaconState.BeaconInfo> beaconInfos = beaconState.getBeaconInfo();
+                                for (BeaconState.BeaconInfo beacon : beaconInfos) {
+                                    addBeaconText(beacon);
                                 }
-
-                                @Override
-                                public String getType() {
-                                    return "AltBeacon";
-                                }
-
-                                @Override
-                                public byte[] getContent() {
-                                    return new byte[0];
-                                }
-                            };
-                            beaconInfos.add(beaconInfo);
-                            for (BeaconState.BeaconInfo beacon : beaconInfos) {
-                                addBeaconText(beacon);
-                            }
-                        } else {
-                            Log.d("NO", "NO");
-
-                            List<BeaconState.BeaconInfo> beaconInfos = new ArrayList<BeaconState.BeaconInfo>();
-
-                            BeaconState.BeaconInfo beaconInfo = new BeaconState.BeaconInfo() {
-                                @Override
-                                public String getNamespace() {
-                                    return "0009-AABG-LLKM-UU89";
-                                }
-
-                                @Override
-                                public String getType() {
-                                    return "Alt-Beacon";
-                                }
-
-                                @Override
-                                public byte[] getContent() {
-                                    return new byte[0];
-                                }
-                            };
-
-                            BeaconState.BeaconInfo beaconInfoo = new BeaconState.BeaconInfo() {
-                                @Override
-                                public String getNamespace() {
-                                    return "9784-BYHG-IKOM-77DV";
-                                }
-
-                                @Override
-                                public String getType() {
-                                    return "Alt-Beacon";
-                                }
-
-                                @Override
-                                public byte[] getContent() {
-                                    return new byte[0];
-                                }
-                            };
-
-                            beaconInfos.add(beaconInfo);
-                            beaconInfos.add(beaconInfoo);
-                            for (BeaconState.BeaconInfo beacon : beaconInfos) {
-                                addBeaconText(beacon);
+                            } else {
+                                Snackbar.make(mBeaconsLayout,
+                                        getString(R.string.error_general),
+                                        Snackbar.LENGTH_LONG).show();
                             }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     private void addBeaconText(BeaconState.BeaconInfo beaconInfo) {
