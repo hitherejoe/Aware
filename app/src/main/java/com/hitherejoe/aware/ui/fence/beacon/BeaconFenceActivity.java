@@ -41,10 +41,8 @@ public class BeaconFenceActivity extends AppCompatActivity {
     private static final int BEACON_ZONE_IN = 0;
     private static final int BEACON_ZONE_OUT = 1;
 
-    @BindView(R.id.layout_root)
-    RelativeLayout mLayoutHeadphoneFence;
-    @BindView(R.id.text_headphone_state)
-    TextView mHeadphoneText;
+    @BindView(R.id.layout_root) RelativeLayout mLayoutBeaconFence;
+    @BindView(R.id.text_headphone_state) TextView mBeaconText;
 
     private GoogleApiClient mGoogleApiClient;
     private PendingIntent mPendingIntent;
@@ -115,11 +113,11 @@ public class BeaconFenceActivity extends AppCompatActivity {
                     @Override
                     public void onResult(@NonNull Status status) {
                         if (status.isSuccess()) {
-                            Snackbar.make(mLayoutHeadphoneFence,
+                            Snackbar.make(mLayoutBeaconFence,
                                     "Fence Registered",
                                     Snackbar.LENGTH_LONG).show();
                         } else {
-                            Snackbar.make(mLayoutHeadphoneFence,
+                            Snackbar.make(mLayoutBeaconFence,
                                     "Fence Not Registered",
                                     Snackbar.LENGTH_LONG).show();
                         }
@@ -135,14 +133,14 @@ public class BeaconFenceActivity extends AppCompatActivity {
                         .build()).setResultCallback(new ResultCallbacks<Status>() {
             @Override
             public void onSuccess(@NonNull Status status) {
-                Snackbar.make(mLayoutHeadphoneFence,
+                Snackbar.make(mLayoutBeaconFence,
                         "Fence Removed",
                         Snackbar.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(@NonNull Status status) {
-                Snackbar.make(mLayoutHeadphoneFence,
+                Snackbar.make(mLayoutBeaconFence,
                         "Fence Not Removed",
                         Snackbar.LENGTH_LONG).show();
             }
@@ -151,10 +149,10 @@ public class BeaconFenceActivity extends AppCompatActivity {
 
     private void setBeaconState(int beaconState) {
         if (beaconState == BEACON_ZONE_IN) {
-            mHeadphoneText.setText(R.string.text_in_beacon_zone);
+            mBeaconText.setText(R.string.text_in_beacon_zone);
 
         } else {
-            mHeadphoneText.setText(R.string.text_not_in_beacon_zone);
+            mBeaconText.setText(R.string.text_not_in_beacon_zone);
         }
     }
 
@@ -176,8 +174,8 @@ public class BeaconFenceActivity extends AppCompatActivity {
                         setBeaconState(BEACON_ZONE_OUT);
                         break;
                     case FenceState.UNKNOWN:
-                        Snackbar.make(mLayoutHeadphoneFence,
-                                "Oops, your headphone status is unknown!",
+                        Snackbar.make(mLayoutBeaconFence,
+                                "Oops, your beacon status is unknown!",
                                 Snackbar.LENGTH_LONG).show();
                         break;
                 }
