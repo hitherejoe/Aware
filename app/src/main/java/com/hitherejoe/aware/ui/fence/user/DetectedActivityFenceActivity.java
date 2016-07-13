@@ -84,15 +84,15 @@ public class DetectedActivityFenceActivity extends AppCompatActivity {
     }
 
     private void registerFences() {
-        AwarenessFence headphoneFence = DetectedActivityFence.during(DetectedActivity.WALKING);
-        AwarenessFence startWalking = DetectedActivityFence.starting(DetectedActivity.WALKING);
+        AwarenessFence duringWalkingFence = DetectedActivityFence.during(DetectedActivity.WALKING);
+        AwarenessFence startWalkingFence = DetectedActivityFence.starting(DetectedActivity.WALKING);
         AwarenessFence stopWalkingFence = DetectedActivityFence.stopping(DetectedActivity.WALKING);
 
         Awareness.FenceApi.updateFences(
                 mGoogleApiClient,
                 new FenceUpdateRequest.Builder()
-                        .addFence(DURING_FENCE_KEY, headphoneFence, mPendingIntent)
-                        .addFence(STARTING_FENCE_KEY, startWalking, mPendingIntent)
+                        .addFence(DURING_FENCE_KEY, duringWalkingFence, mPendingIntent)
+                        .addFence(STARTING_FENCE_KEY, startWalkingFence, mPendingIntent)
                         .addFence(STOPPING_FENCE_KEY, stopWalkingFence, mPendingIntent)
                         .build())
                 .setResultCallback(new ResultCallback<Status>() {
@@ -135,8 +135,8 @@ public class DetectedActivityFenceActivity extends AppCompatActivity {
         });
     }
 
-    private void setHeadphoneState(int headphoneState) {
-        switch (headphoneState) {
+    private void setUserState(int userState) {
+        switch (userState) {
             case STATUS_DEFAULT:
                 mDetectedActivityText.setText(R.string.text_still);
 
@@ -191,40 +191,40 @@ public class DetectedActivityFenceActivity extends AppCompatActivity {
             if (TextUtils.equals(fenceState.getFenceKey(), DURING_FENCE_KEY)) {
                 switch(fenceState.getCurrentState()) {
                     case FenceState.TRUE:
-                        setHeadphoneState(STATUS_DURING);
+                        setUserState(STATUS_DURING);
                         break;
                     case FenceState.FALSE:
-                        setHeadphoneState(STATUS_DEFAULT);
+                        setUserState(STATUS_DEFAULT);
                         break;
                     case FenceState.UNKNOWN:
                         Snackbar.make(mLayoutDetectedActivityFence,
-                                "Oops, your headphone status is unknown!",
+                                "Oops, your user status is unknown!",
                                 Snackbar.LENGTH_LONG).show();
                         break;
                 }
             } else if (TextUtils.equals(fenceState.getFenceKey(), STARTING_FENCE_KEY)) {
                 switch(fenceState.getCurrentState()) {
                     case FenceState.TRUE:
-                        setHeadphoneState(STATUS_STARTING);
+                        setUserState(STATUS_STARTING);
                         break;
                     case FenceState.FALSE:
                         break;
                     case FenceState.UNKNOWN:
                         Snackbar.make(mLayoutDetectedActivityFence,
-                                "Oops, your headphone status is unknown!",
+                                "Oops, your user status is unknown!",
                                 Snackbar.LENGTH_LONG).show();
                         break;
                 }
             } else if (TextUtils.equals(fenceState.getFenceKey(), STOPPING_FENCE_KEY)) {
                 switch(fenceState.getCurrentState()) {
                     case FenceState.TRUE:
-                        setHeadphoneState(STATUS_STOPPING);
+                        setUserState(STATUS_STOPPING);
                         break;
                     case FenceState.FALSE:
                         break;
                     case FenceState.UNKNOWN:
                         Snackbar.make(mLayoutDetectedActivityFence,
-                                "Oops, your headphone status is unknown!",
+                                "Oops, your user status is unknown!",
                                 Snackbar.LENGTH_LONG).show();
                         break;
                 }

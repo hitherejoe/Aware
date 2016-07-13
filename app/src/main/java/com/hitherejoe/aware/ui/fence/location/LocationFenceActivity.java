@@ -43,7 +43,7 @@ public class LocationFenceActivity extends AppCompatActivity {
     public static final int STATUS_EXITING = 3;
 
     @BindView(R.id.layout_location_fence) RelativeLayout mLayoutLocationFence;
-    @BindView(R.id.text_headphone_state) TextView mHeadphoneText;
+    @BindView(R.id.text_location_state) TextView mLocationText;
 
     private static final int PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 940;
 
@@ -162,19 +162,19 @@ public class LocationFenceActivity extends AppCompatActivity {
         });
     }
 
-    private void setHeadphoneState(int status) {
+    private void setLocationState(int status) {
         switch (status) {
             case STATUS_IN:
-                mHeadphoneText.setText(R.string.text_at_home);
+                mLocationText.setText(R.string.text_at_home);
                 break;
             case STATUS_OUT:
-                mHeadphoneText.setText(R.string.text_not_at_home);
+                mLocationText.setText(R.string.text_not_at_home);
                 break;
             case STATUS_ENTERING:
-                mHeadphoneText.setText(R.string.text_entering_home);
+                mLocationText.setText(R.string.text_entering_home);
                 break;
             case STATUS_EXITING:
-                mHeadphoneText.setText(R.string.text_exiting_home);
+                mLocationText.setText(R.string.text_exiting_home);
                 break;
         }
     }
@@ -191,42 +191,42 @@ public class LocationFenceActivity extends AppCompatActivity {
             if (TextUtils.equals(fenceState.getFenceKey(), IN_LOCATION_FENCE_KEY)) {
                 switch (fenceState.getCurrentState()) {
                     case FenceState.TRUE:
-                        setHeadphoneState(STATUS_IN);
+                        setLocationState(STATUS_IN);
                         break;
                     case FenceState.FALSE:
-                        setHeadphoneState(STATUS_OUT);
+                        setLocationState(STATUS_OUT);
                         break;
                     case FenceState.UNKNOWN:
                         Snackbar.make(mLayoutLocationFence,
-                                "Oops, your headphone status is unknown!",
+                                "Oops, your location status is unknown!",
                                 Snackbar.LENGTH_LONG).show();
                         break;
                 }
             } else if (TextUtils.equals(fenceState.getFenceKey(), EXITING_LOCATION_FENCE_KEY)) {
                 switch (fenceState.getCurrentState()) {
                     case FenceState.TRUE:
-                        setHeadphoneState(STATUS_EXITING);
+                        setLocationState(STATUS_EXITING);
                         break;
                     case FenceState.FALSE:
 
                         break;
                     case FenceState.UNKNOWN:
                         Snackbar.make(mLayoutLocationFence,
-                                "Oops, your headphone status is unknown!",
+                                "Oops, your location status is unknown!",
                                 Snackbar.LENGTH_LONG).show();
                         break;
                 }
             } else if (TextUtils.equals(fenceState.getFenceKey(), ENTERING_LOCATION_FENCE_KEY)) {
                 switch (fenceState.getCurrentState()) {
                     case FenceState.TRUE:
-                        setHeadphoneState(STATUS_ENTERING);
+                        setLocationState(STATUS_ENTERING);
                         break;
                     case FenceState.FALSE:
 
                         break;
                     case FenceState.UNKNOWN:
                         Snackbar.make(mLayoutLocationFence,
-                                "Oops, your headphone status is unknown!",
+                                "Oops, your location status is unknown!",
                                 Snackbar.LENGTH_LONG).show();
                         break;
                 }

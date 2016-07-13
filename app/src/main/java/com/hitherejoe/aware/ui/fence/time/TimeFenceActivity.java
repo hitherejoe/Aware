@@ -36,8 +36,8 @@ public class TimeFenceActivity extends AppCompatActivity {
     private static final int TIME_WITHIN = 0;
     private static final int TIME_NOT_IN = 1;
 
-    @BindView(R.id.layout_root) RelativeLayout mLayoutHeadphoneFence;
-    @BindView(R.id.text_headphone_state) TextView mHeadphoneText;
+    @BindView(R.id.layout_root) RelativeLayout mLayoutTimeFence;
+    @BindView(R.id.text_headphone_state) TextView mTimeText;
 
     private GoogleApiClient mGoogleApiClient;
     private PendingIntent mPendingIntent;
@@ -79,22 +79,22 @@ public class TimeFenceActivity extends AppCompatActivity {
     }
 
     private void setupFence() {
-        AwarenessFence headphoneFence = TimeFence.inDailyInterval(TimeZone.getDefault(),
+        AwarenessFence timeFence = TimeFence.inDailyInterval(TimeZone.getDefault(),
                 0L, 24L * 60L * 60L * 1000L);
         Awareness.FenceApi.updateFences(
                 mGoogleApiClient,
                 new FenceUpdateRequest.Builder()
-                        .addFence(TIME_FENCE_KEY, headphoneFence, mPendingIntent)
+                        .addFence(TIME_FENCE_KEY, timeFence, mPendingIntent)
                         .build())
                 .setResultCallback(new ResultCallback<Status>() {
                     @Override
                     public void onResult(@NonNull Status status) {
                         if (status.isSuccess()) {
-                            Snackbar.make(mLayoutHeadphoneFence,
+                            Snackbar.make(mLayoutTimeFence,
                                     "Fence Registered",
                                     Snackbar.LENGTH_LONG).show();
                         } else {
-                            Snackbar.make(mLayoutHeadphoneFence,
+                            Snackbar.make(mLayoutTimeFence,
                                     "Fence Not Registered",
                                     Snackbar.LENGTH_LONG).show();
                         }
@@ -110,14 +110,14 @@ public class TimeFenceActivity extends AppCompatActivity {
                         .build()).setResultCallback(new ResultCallbacks<Status>() {
             @Override
             public void onSuccess(@NonNull Status status) {
-                Snackbar.make(mLayoutHeadphoneFence,
+                Snackbar.make(mLayoutTimeFence,
                         "Fence Removed",
                         Snackbar.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(@NonNull Status status) {
-                Snackbar.make(mLayoutHeadphoneFence,
+                Snackbar.make(mLayoutTimeFence,
                         "Fence Not Removed",
                         Snackbar.LENGTH_LONG).show();
             }
@@ -126,9 +126,9 @@ public class TimeFenceActivity extends AppCompatActivity {
 
     private void setTimeState(int timeState) {
         if (timeState == TIME_WITHIN) {
-            mHeadphoneText.setText(R.string.text_that_time);
+            mTimeText.setText(R.string.text_that_time);
         } else {
-            mHeadphoneText.setText(R.string.text_not_that_time);
+            mTimeText.setText(R.string.text_not_that_time);
         }
     }
 
@@ -150,8 +150,8 @@ public class TimeFenceActivity extends AppCompatActivity {
                         setTimeState(TIME_NOT_IN);
                         break;
                     case FenceState.UNKNOWN:
-                        Snackbar.make(mLayoutHeadphoneFence,
-                                "Oops, your headphone status is unknown!",
+                        Snackbar.make(mLayoutTimeFence,
+                                "Oops, your time status is unknown!",
                                 Snackbar.LENGTH_LONG).show();
                         break;
                 }
