@@ -22,17 +22,39 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.snapshot.headphone.HeadphoneActivity" />
-        <activity android:name=".ui.snapshot.weather.WeatherActivity" />
-        <activity android:name=".ui.snapshot.places.PlacesActivity" />
-        <activity android:name=".ui.snapshot.user.UserActivity" />
-        <activity android:name=".ui.snapshot.location.LocationActivity" />
-        <activity android:name=".ui.snapshot.beacons.BeaconActivity" />
-        <activity android:name=".ui.fence.headphone.HeadphoneFenceActivity" />
-        <activity android:name=".ui.fence.user.DetectedActivityFenceActivity" />
-        <activity android:name=".ui.fence.location.LocationFenceActivity" />
-        <activity android:name=".ui.fence.time.TimeFenceActivity" />
-        <activity android:name=".ui.fence.beacon.BeaconFenceActivity" />
+        <activity
+            android:name=".ui.snapshot.headphone.HeadphoneActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.snapshot.weather.WeatherActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.snapshot.places.PlacesActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.snapshot.user.UserActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.snapshot.location.LocationActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.snapshot.beacons.BeaconActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.fence.headphone.HeadphoneFenceActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.fence.user.DetectedActivityFenceActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.fence.location.LocationFenceActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.fence.time.TimeFenceActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.fence.beacon.BeaconFenceActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
 
         <meta-data
             android:name="com.google.android.awareness.API_KEY"
