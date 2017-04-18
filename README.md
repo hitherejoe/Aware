@@ -7,7 +7,7 @@ Aware
 
 Aware is a simple playground for the new Google Awareness API, nothing fancy!
 
-#What you can try out
+# What you can try out
 ---------------------
 
 <p align="center">
